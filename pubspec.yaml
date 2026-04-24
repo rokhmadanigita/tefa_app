@@ -1,0 +1,44 @@
+name: tefa_app
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  supabase_flutter: ^2.12.0
+  image_picker: ^1.0.4
+  cached_network_image: ^3.3.0
+  intl: ^0.18.1
+  provider: ^6.1.1
+  geolocator: ^10.1.0
+  geocoding: ^2.1.1
+  flutter_map: ^6.0.0
+  latlong2: ^0.9.0
+  shared_preferences: ^2.3.2
+  url_launcher: ^6.2.5
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+  flutter_lints: ^5.0.0
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/banner/icon.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/banner/icon.png"
+  min_sdk_android: 21
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/banner/
+    - assets/chat/
