@@ -440,41 +440,24 @@ class _HomePageState extends State<HomePage> {
 
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: GridView.builder(
-            shrinkWrap: true,
-            padding: EdgeInsets.zero,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: products.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 15,
-              mainAxisSpacing: 15,
-              childAspectRatio: 0.75,
-            ),
-            itemBuilder: (context, index) {
-              final product = products[index];
-
-              return ProductCard(
-                product: product,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => DetailPage(product: product),
-                    ),
-                  );
-                },
-
-                onAddToCart: () {
-                  CartService().add(product);
-
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Produk ditambahkan ke keranjang"),
-                      duration: Duration(seconds: 1),
-                    ),
-                  );
-                },
+          child: buildProductGrid(
+            context: context,
+            products: products,
+            onProductTap: (product) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => DetailPage(product: product),
+                ),
+              );
+            },
+            onAddToCart: (product) {
+              CartService().add(product);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Produk ditambahkan ke keranjang"),
+                  duration: Duration(seconds: 1),
+                ),
               );
             },
           ),
@@ -484,7 +467,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildJasaSection() {
-    // Logika khusus: Jika kategori RPL dipilih, ambil juga kategori Rekomendasi
     var query = Supabase.instance.client.from('services').select();
     
     if (_categories[_activeCategory] == 'RPL') {
@@ -554,7 +536,6 @@ class DynamicNotchPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     Path path = Path();
-    // Perbaikan centerX agar sejajar dengan row spaceAround (margin horizontal 30)
     double centerX = (size.width / 2) + (alignmentX * (size.width / 2 - 30));
     double notchWidth = 80;
 

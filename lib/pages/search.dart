@@ -142,26 +142,16 @@ class _SearchPageState extends State<SearchPage> {
             children: [
               const Text("Rekomendasi Produk", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF23447D))),
               const SizedBox(height: 15),
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.75,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                ),
-                itemCount: products.length,
-                itemBuilder: (context, index) => ProductCard(
-                  product: products[index],
-                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => DetailPage(product: products[index]))),
-                  onAddToCart: () {
-                    CartService().add(products[index]);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("'${products[index].title}' ditambahkan ke keranjang.")),
-                    );
-                  },
-                ),
+              buildProductGrid(
+                context: context,
+                products: products,
+                onProductTap: (product) => Navigator.push(context, MaterialPageRoute(builder: (_) => DetailPage(product: product))),
+                onAddToCart: (product) {
+                  CartService().add(product);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("'${product.title}' ditambahkan ke keranjang.")),
+                  );
+                },
               ),
             ],
           ),
@@ -195,26 +185,16 @@ class _SearchPageState extends State<SearchPage> {
           if (products.isNotEmpty) ...[
             const Text("Produk", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF23447D))),
             const SizedBox(height: 15),
-            GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.75,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
-              ),
-              itemCount: products.length,
-              itemBuilder: (context, index) => ProductCard(
-                product: products[index],
-                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => DetailPage(product: products[index]))),
-                onAddToCart: () {
-                  CartService().add(products[index]);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("'${products[index].title}' ditambahkan ke keranjang.")),
-                  );
-                },
-              ),
+            buildProductGrid(
+              context: context,
+              products: products,
+              onProductTap: (product) => Navigator.push(context, MaterialPageRoute(builder: (_) => DetailPage(product: product))),
+              onAddToCart: (product) {
+                CartService().add(product);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("'${product.title}' ditambahkan ke keranjang.")),
+                );
+              },
             ),
             const SizedBox(height: 25),
           ],

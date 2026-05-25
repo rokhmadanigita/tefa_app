@@ -202,19 +202,18 @@ Widget buildProductGrid({
   required Function(Product) onProductTap,
   required Function(Product) onAddToCart,
 }) {
-
   return LayoutBuilder(
     builder: (context, constraints) {
       int crossAxisCount = 2;
-      double maxWidth = constraints.maxWidth;
+      double availableWidth = constraints.maxWidth;
 
-      if (maxWidth > 1400) {
+      if (availableWidth > 1100) {
         crossAxisCount = 6;
-      } else if (maxWidth > 1200) {
+      } else if (availableWidth > 850) {
         crossAxisCount = 5;
-      } else if (maxWidth > 900) {
+      } else if (availableWidth > 650) {
         crossAxisCount = 4;
-      } else if (maxWidth > 600) {
+      } else if (availableWidth > 450) {
         crossAxisCount = 3;
       }
 
