@@ -374,7 +374,7 @@ class _HomePageState extends State<HomePage> {
         borderRadius: BorderRadius.circular(20),
         child: Image.asset(
           _categoryBanners[_activeCategory]!,
-          height: 150,
+          height: 300,
           width: double.infinity,
           fit: BoxFit.cover,
         ),
